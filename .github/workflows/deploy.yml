@@ -18,6 +18,16 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+          
+      - name: Initialize Terraform
+        run: |
+          cd terraform
+          terraform init
+
+      - name: Apply Terraform configuration
+        run: |
+          cd terraform
+          terraform apply -auto-approve
 
       - name: Build with Maven
         run: mvn clean package -DskipTests
