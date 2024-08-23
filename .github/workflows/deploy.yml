@@ -96,10 +96,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/myapp:latest .
-          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/myapp:latest
-        with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+          docker build -t us-central1-docker.pkg.dev/festive-shield-433206-t8/my-docker-repo/myapp:latest .
+          docker push us-central1-docker.pkg.dev/festive-shield-433206-t8/my-docker-repo/myapp:latest
 
       - name: Deploy with Helm
         run: |
