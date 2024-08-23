@@ -36,5 +36,5 @@ variable "node_machine_type" {
 variable "repo_name" {
   description = "The name of the Artifact Registry repository"
   type        = string
-  default     = "my-docker-repo"
+  default     = "my-docker-repo-2"
 }

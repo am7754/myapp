@@ -16,7 +16,7 @@ resource "google_container_cluster" "my-gke-cluster" {
   }
 }
 
-resource "google_artifact_registry_repository" "my_docker_repo" {
+resource "google_artifact_registry_repository" "my_docker_repo_2" {
   repository_id = var.repo_name
   format        = "DOCKER"
   location      = var.region
