@@ -14,10 +14,10 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_artifact_registry_repository" "my_docker_repo" {
-  name     = var.repo_name
-  format   = "DOCKER"
-  location = var.region
-  project  = var.project_id
+  repository_id = var.repo_name
+  format        = "DOCKER"
+  location      = var.region
+  project       = var.project_id
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {

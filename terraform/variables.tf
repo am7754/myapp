@@ -31,5 +31,4 @@ variable "repo_name" {
   description = "The name of the Artifact Registry repository"
   type        = string
   default     = "my-docker-repo"
-
 }
