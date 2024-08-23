@@ -35,19 +35,19 @@ jobs:
       - name: Terraform Init
         run: terraform init
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
       # Checks that all Terraform configuration files adhere to a canonical format
       - name: Terraform Format
         run: terraform fmt -check
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan -input=false
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
         # On push to "main", build or change infrastructure according to Terraform configuration files
         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -55,7 +55,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
 
       - name: Build with Maven
@@ -64,13 +64,13 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           export_default_credentials: true
 
       - name: Create Kubernetes cluster (if necessary)
