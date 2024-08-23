@@ -5,7 +5,7 @@ provider "google" {
 
 resource "google_container_cluster" "my-gke-cluster" {
   name                = var.cluster_name
-  location            = var.region
+  location            = var.cluster_region
   initial_node_count  = var.node_count
   deletion_protection = false
 

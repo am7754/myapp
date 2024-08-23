@@ -10,6 +10,12 @@ variable "region" {
   default     = "us-central1"
 }
 
+variable "cluster_region" {
+  description = "The region where cluster will be created."
+  type        = string
+  default     = "us-central1-f"
+}
+
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster."
   type        = string

@@ -85,10 +85,10 @@ jobs:
 
       - name: Create Kubernetes cluster (if necessary)
         run: |
-            gcloud container clusters create my-gke-cluster --region us-central1 --num-nodes=1 --disk-size=30 || true
+            gcloud container clusters create my-gke-cluster --region us-central1-f --num-nodes=1 --disk-size=30 || true
 
       - name: Configure kubectl
-        run: gcloud container clusters get-credentials my-gke-cluster --region us-central1 --project ${{ secrets.GCP_PROJECT_ID }}
+        run: gcloud container clusters get-credentials my-gke-cluster --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Build and push Docker image
         run: |
