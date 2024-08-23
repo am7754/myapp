@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "myapp.name" . }}
+  labels:
+    app: {{ include "myapp.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "myapp.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "myapp.name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MYSQL_HOST
+          value: "mysql"
+        - name: MYSQL_DATABASE
+          value: "{{ .Values.mysql.database }}"
+        - name: MYSQL_USER
+          value: "{{ .Values.mysql.username }}"
+        - name: MYSQL_PASSWORD
+          value: "{{ .Values.mysql.password }}"
+      - name: mysql
+        image: {{ .Values.mysql.image }}
+        env:
+        - name: MYSQL_DATABASE
+          value: {{ .Values.mysql.database }}
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.username }}
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.mysql.password }}
+        ports:
+        - containerPort: 3306

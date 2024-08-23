@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: myapp
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+mysql:
+  image: mysql:8.0
+  username: user
+  password: password
+  database: mydb
