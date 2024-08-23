@@ -36,7 +36,9 @@ jobs:
           echo "PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
           echo "REGION=${{ secrets.GCP_REGION }}" >> $GITHUB_ENV
           echo "REPO_NAME=${{ secrets.GCP_REPO_NAME }}" >> $GITHUB_ENV
-          echo "CLUSTER_NAME=${{ secrets.GCP_CLUSTER_NAME }}" >> $GITHUB_ENV	  
+          echo "CLUSTER_NAME=${{ secrets.GCP_CLUSTER_NAME }}" >> $GITHUB_ENV
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
