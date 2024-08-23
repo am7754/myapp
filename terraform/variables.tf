@@ -13,7 +13,7 @@ variable "region" {
 variable "cluster_name" {
   description = "The name of the Kubernetes cluster."
   type        = string
-  default     = "my-gke-cluster"
+  default     = "my-gke-cluster-2"
 }
 
 variable "node_count" {
