@@ -26,8 +26,6 @@ variable "node_machine_type" {
   description  = "The machine type for the cluster nodes."
   type         = string
   default      = "e2-medium"
-  disk_size_gb = 100
-  preemptible  = true
 }
 variable "repo_name" {
   description = "The name of the Artifact Registry repository"

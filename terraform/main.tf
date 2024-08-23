@@ -10,6 +10,8 @@ resource "google_container_cluster" "my-gke-cluster" {
 
   node_config {
     machine_type = var.node_machine_type
+    disk_size_gb = 100
+    preemptible  = true
   }
 }
 
