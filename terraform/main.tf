@@ -23,7 +23,3 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     machine_type = var.node_machine_type
   }
 }
-
-output "kubeconfig" {
-  value = google_container_cluster.primary.endpoint
-}
