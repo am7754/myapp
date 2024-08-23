@@ -3,7 +3,7 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_container_cluster" "primary" {
+resource "google_container_cluster" "my-gke-cluster" {
   name               = var.cluster_name
   location           = var.region
   initial_node_count = var.node_count
