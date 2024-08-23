@@ -87,12 +87,12 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           export_default_credentials: true
 
-      - name: Create Kubernetes cluster (if necessary)
-        run: |
-            gcloud container clusters create my-gke-cluster --region us-central1-f --num-nodes=1 --disk-size=30 || true
+     # - name: Create Kubernetes cluster (if necessary)
+     #   run: |
+     #       gcloud container clusters create my-gke-cluster-2 --region us-central1-f --num-nodes=1 --disk-size=30 || true
 
       - name: Configure kubectl
-        run: gcloud container clusters get-credentials my-gke-cluster --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
+        run: gcloud container clusters get-credentials my-gke-cluster-2 --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Build and push Docker image
         run: |
