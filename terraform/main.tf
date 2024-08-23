@@ -21,8 +21,8 @@ resource "google_artifact_registry_repository" "my_docker_repo" {
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  cluster    = google_container_cluster.primary.name
-  location   = google_container_cluster.primary.location
+  cluster    = google_container_cluster.my-gke-cluster.name
+  location   = google_container_cluster.my-gke-cluster.location
   node_count = var.node_count
 
   node_config {
