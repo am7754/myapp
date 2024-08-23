@@ -43,8 +43,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapp:latest .
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapp:latest
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/myapp:latest .
+          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/my-docker-repo/myapp:latest
 
       - name: Deploy with Helm
         run: |
