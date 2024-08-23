@@ -50,7 +50,6 @@ jobs:
       - name: Import Existing Resources
         run: |
           terraform import google_artifact_registry_repository.my_docker_repo  projects/festive-shield-433206-t8/locations/us-central1/repositories/my-docker-repo
-          terraform import google_container_cluster.my-gke-cluster projects/festive-shield-433206-t8/locations/us-central1/clusters/my-gke-cluster-2
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
