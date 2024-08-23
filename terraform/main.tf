@@ -24,7 +24,7 @@ resource "google_artifact_registry_repository" "my_docker_repo" {
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name = "gke-my-gke-cluster-2-terraform-202408-cb68b8be-qmpn"
+  //name = "gke-my-gke-cluster-2-terraform-202408-cb68b8be-qmpn"
   cluster    = google_container_cluster.my-gke-cluster.name
   location   = google_container_cluster.my-gke-cluster.location
   node_count = var.node_count
