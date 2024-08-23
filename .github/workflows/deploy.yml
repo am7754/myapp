@@ -49,7 +49,7 @@ jobs:
       # Import existing resources into Terraform
       - name: Import Existing Resources
         run: |
-          terraform import google_artifact_registry_repository.my_docker_repo projects/$PROJECT_ID/locations/$REGION/repositories/$REPO_NAME
+          terraform import google_artifact_registry_repository.my_docker_repo  projects/$PROJECT_ID/locations/$REGION/repositories/$REPO_NAME
           terraform import google_container_cluster.my-gke-cluster projects/$PROJECT_ID/locations/$REGION/clusters/$CLUSTER_NAME
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
