@@ -108,6 +108,5 @@ jobs:
           docker push us-central1-docker.pkg.dev/festive-shield-433206-t8/my-docker-repo-2/myapp:latest
 
       - name: Deploy with Helm
-        working-directory: ./helm/myapp
         run: |
           helm upgrade --install myapp ./helm/myapp --set image.repository=gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapp --set image.tag=latest
