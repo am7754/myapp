@@ -50,7 +50,7 @@ resource "kubernetes_secret" "my_docker_secret" {
           username = "_json_key"
           password = local.gcr_json_key
           email    = "cicd-account-3@festive-shield-433206-t8.iam.gserviceaccount.com"
-          auth     = base64encode("_json_key:" + local.gcr_json_key)
+          auth     = base64encode(format("%s:%s", "_json_key", local.gcr_json_key))
         }
       }
     })
