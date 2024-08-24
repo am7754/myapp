@@ -94,6 +94,9 @@ jobs:
       - name: Configure kubectl
         run: gcloud container clusters get-credentials my-gke-cluster-2 --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
 
+      - name: Authenticate Docker to Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
       - name: Build and push Docker image
         run: |
           docker build -t us-central1-docker.pkg.dev/festive-shield-433206-t8/my-docker-repo-2/myapp:latest .
