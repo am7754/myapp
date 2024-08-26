@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: myapp
+  repository: "us-central1-docker.pkg.dev/festive-shield-433206-t8/my-docker-repo-2/myapp"
   pullPolicy: IfNotPresent
   tag: "latest"
 
