@@ -90,8 +90,8 @@ jobs:
 
       - name: Generate Docker config JSON
         run: |
-        gcloud auth print-access-token | \
-        jq -n --arg token "$(cat)" '{"auths": {"us-central1-docker.pkg.dev": {"auth": "Bearer \($token)"}}}' > config.json          
+          TOKEN=$(gcloud auth print-access-token)
+          jq -n --arg token "$TOKEN" '{"auths": {"us-central1-docker.pkg.dev": {"auth": "Bearer \($token)"}}}' > config.json
 
       - name: Install gke-gcloud-auth-plugin
         run: |
