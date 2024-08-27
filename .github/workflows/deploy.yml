@@ -59,6 +59,10 @@ jobs:
       - name: Set DOCKER_CONFIG_JSON environment variable
         run: echo "DOCKER_CONFIG_JSON=$(base64 -w 0 config.json)" >> $GITHUB_ENV
 
+      - name: Debug docker_config_json
+        run: | 
+              echo "docker_config_json: ${{ env.DOCKER_CONFIG_JSON }}"
+
       - name: Install gke-gcloud-auth-plugin
         run: |
           gcloud components install gke-gcloud-auth-plugin              
@@ -73,7 +77,7 @@ jobs:
       # Import existing resources into Terraform
       - name: Import Existing Resources
         run: |
-          terraform import google_container_cluster.my-gke-cluster projects/festive-shield-433206-t8/locations/us-central1-f/clusters/my-gke-cluster-2
+      #    terraform import google_container_cluster.my-gke-cluster projects/festive-shield-433206-t8/locations/us-central1-f/clusters/my-gke-cluster-2
           terraform import google_artifact_registry_repository.my_docker_repo_2  projects/festive-shield-433206-t8/locations/us-central1/repositories/my-docker-repo-2
 
         env:
@@ -109,7 +113,7 @@ jobs:
      #       gcloud container clusters create my-gke-cluster-2 --region us-central1-f --num-nodes=1 --disk-size=30 || true
 
       - name: Configure kubectl
-        run: gcloud container clusters get-credentials my-gke-cluster-2 --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
+        run: gcloud container clusters get-credentials my-gke-cluster-3 --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Authenticate Docker to Artifact Registry
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
