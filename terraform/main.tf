@@ -34,9 +34,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     machine_type = var.node_machine_type
   }
 }
-variable "docker_config_json" {
-  type = string
-}
 resource "kubernetes_secret" "my-docker-secret" {
   metadata {
     name      = "my-docker-secret"
