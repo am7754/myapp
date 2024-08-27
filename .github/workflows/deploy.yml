@@ -79,14 +79,6 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         working-directory: ./terraform
 
-      # Import existing resources into Terraform
-      - name: Import Existing Resources
-        run: |
-          terraform import google_artifact_registry_repository.my_docker_repo_2  projects/festive-shield-433206-t8/locations/us-central1/repositories/my-docker-repo-2
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-        working-directory: ./terraform
-
       # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan -var="docker_config_json=${{ env.DOCKER_CONFIG_JSON }}" -input=false
