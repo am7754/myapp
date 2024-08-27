@@ -80,6 +80,9 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         working-directory: ./terraform
 
+      - name: Debug DOCKER_CONFIG_JSON
+        run: echo $DOCKER_CONFIG_JSON
+
       # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan -var="docker_config_json=${{ env.DOCKER_CONFIG_JSON }}" -input=false
