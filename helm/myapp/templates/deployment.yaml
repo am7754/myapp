@@ -21,12 +21,3 @@ spec:
           - name: my-dockerhub-secret
         ports:
         - containerPort: 8080
-#        env:
-#        - name: MYSQL_HOST
-#          value: "{{ .Values.mysql.MYSQL_HOST }}"
-#        - name: MYSQL_DATABASE
-#          value: "{{ .Values.mysql.database }}"
-#        - name: MYSQL_USER
-#          value: "{{ .Values.mysql.username }}"
-#        - name: MYSQL_PASSWORD
-#          value: "{{ .Values.mysql.password }}"
