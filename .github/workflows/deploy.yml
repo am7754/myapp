@@ -39,6 +39,30 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          export_default_credentials: true
+
+      - name: Generate Docker config JSON
+        run: |
+          gcloud auth print-access-token | \
+          jq -n --arg token "$(cat)" '{"auths": {"us-central1-docker.pkg.dev": {"auth": "Bearer \($token)"}}}' > config.json
+
+      - name: Set DOCKER_CONFIG_JSON environment variable
+        run: echo "DOCKER_CONFIG_JSON=$(base64 -w 0 config.json)" >> $GITHUB_ENV
+
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin              
+
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: terraform init
@@ -76,28 +100,6 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          export_default_credentials: true
-
-      - name: Generate Docker config JSON
-        id: docker-config
-        run: |
-          TOKEN=$(gcloud auth print-access-token)
-          echo "{\"auths\": {\"us-central1-docker.pkg.dev\": {\"auth\": \"Bearer $TOKEN\"}}}" > config.json
-          echo "DOCKER_CONFIG_JSON=$(cat config.json)" >> $GITHUB_ENV
-
-      - name: Install gke-gcloud-auth-plugin
-        run: |
-            gcloud components install gke-gcloud-auth-plugin    
 
      # - name: Create Kubernetes cluster (if necessary)
      #   run: |

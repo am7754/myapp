@@ -44,7 +44,7 @@ resource "kubernetes_secret" "my-docker-secret" {
   }
 
   data = {
-    ".dockerconfigjson" = base64encode(file("config.json"))
+    ".dockerconfigjson" = var.docker_config_json
   }
 
   type = "kubernetes.io/dockerconfigjson"
