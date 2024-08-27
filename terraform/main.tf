@@ -23,6 +23,14 @@ resource "google_artifact_registry_repository" "my_docker_repo_2" {
   project       = var.project_id
 }
 
+provider "kubernetes" {
+  load_config_file = "false"
+  host     = google_container_cluster.my-gke-cluster.endpoint
+  client_certificate     = google_container_cluster.my-gke-cluster.master_auth.0.client_certificate
+  client_key             = google_container_cluster.my-gke-cluster.master_auth.0.client_key
+  cluster_ca_certificate = google_container_cluster.my-gke-cluster.master_auth.0.cluster_ca_certificate
+}
+
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   //name = "gke-my-gke-cluster-2-terraform-202408-cb68b8be-qmpn"
   cluster    = google_container_cluster.my-gke-cluster.name
