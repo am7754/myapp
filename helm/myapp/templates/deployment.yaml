@@ -18,7 +18,7 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullSecrets:
-          - name: dockerhub-secret
+          - name: my-dockerhub-secret
         ports:
         - containerPort: 8080
         env:

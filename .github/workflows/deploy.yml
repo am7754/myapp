@@ -90,7 +90,7 @@ jobs:
         working-directory: ./terraform
 
       - name: Configure kubectl
-        run: gcloud container clusters get-credentials my-gke-cluster-3 --region us-central1-f --project ${{ secrets.GCP_PROJECT_ID }}
+        run: gcloud container clusters get-credentials my-cluster --region us-central1-c --project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Deploy with Helm
         run: |
