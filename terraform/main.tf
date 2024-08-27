@@ -29,8 +29,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 }
 resource "kubernetes_secret" "dockerhub_registry" {
   metadata {
-    name      = "dockerhub-secret"
-    namespace = "default" # Change if you are using a different namespace
+    name = "dockerhub-secret"
   }
 
   data = {
