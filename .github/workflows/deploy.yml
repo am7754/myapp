@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-          
+
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -57,7 +57,8 @@ jobs:
           jq -n --arg token "$(cat)" '{"auths": {"us-central1-docker.pkg.dev": {"auth": "Bearer \($token)"}}}' > config.json
 
       - name: Set DOCKER_CONFIG_JSON environment variable
-        run: echo "DOCKER_CONFIG_JSON=$(base64 -w 0 config.json)" >> $GITHUB_ENV
+        run: | 
+              echo "DOCKER_CONFIG_JSON=$(base64 -w 0 config.json)" >> $GITHUB_ENV
 
       - name: Debug docker_config_json
         run: | 
@@ -82,7 +83,6 @@ jobs:
       - name: Import Existing Resources
         run: |
           terraform import google_artifact_registry_repository.my_docker_repo_2  projects/festive-shield-433206-t8/locations/us-central1/repositories/my-docker-repo-2
-
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         working-directory: ./terraform
