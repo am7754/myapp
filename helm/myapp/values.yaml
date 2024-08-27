@@ -2,7 +2,6 @@ replicaCount: 1
 
 image:
   repository: "ashfaqr27/myapp:latest"
-  pullPolicy: IfNotPresent
   tag: "latest"
 
 service:
