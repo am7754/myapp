@@ -66,8 +66,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ashfaqr27/myapp:latest .
-          docker push ashfaqr27/myapp:latest
+          docker build -t ashfaqr27/myapp:latest2 .
+          docker push ashfaqr27/myapp:latest2
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
@@ -94,4 +94,4 @@ jobs:
 
       - name: Deploy with Helm
         run: |
-          helm upgrade --install myapp ./helm/myapp --set image.repository=ashfaqr27/myapp --set image.tag=latest
+          helm upgrade --install myapp ./helm/myapp --set image.repository=ashfaqr27/myapp --set image.tag=latest2
