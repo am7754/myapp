@@ -24,8 +24,8 @@ resource "google_artifact_registry_repository" "my_docker_repo_2" {
 }
 
 provider "kubernetes" {
-  load_config_file = "false"
-  host     = google_container_cluster.my-gke-cluster.endpoint
+  load_config_file       = "false"
+  host                   = google_container_cluster.my-gke-cluster.endpoint
   client_certificate     = google_container_cluster.my-gke-cluster.master_auth.0.client_certificate
   client_key             = google_container_cluster.my-gke-cluster.master_auth.0.client_key
   cluster_ca_certificate = google_container_cluster.my-gke-cluster.master_auth.0.cluster_ca_certificate
@@ -44,7 +44,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 }
 resource "kubernetes_secret" "my-docker-secret" {
   metadata {
-    name      = "my-docker-secret"
+    name = "my-docker-secret"
   }
 
   data = {
