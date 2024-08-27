@@ -35,8 +35,14 @@ jobs:
               echo "PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
               echo "REGION=${{ secrets.GCP_REGION }}" >> $GITHUB_ENV
               echo "CLUSTER_NAME=${{ secrets.GCP_CLUSTER_NAME }}" >> $GITHUB_ENV
+              echo "GOOGLE_CREDENTIALS=${{ secrets.GCP_CREDENTIALS }}" >> $GITHUB_ENV
+              echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
+              echo "DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}" >> $GITHUB_ENV
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set GCP credentials as environment variable
+        run: echo "GCP_CREDENTIALS_BASE64=${{ secrets.GCP_CREDENTIALS }}" >> $GITHUB_ENV
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
@@ -84,7 +90,11 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -input=false -auto-approve
+        run: terraform apply -var="google_credentials=${{ secrets.GCP_CREDENTIALS }}" \
+          -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+          -var="region=${{ secrets.GCP_REGION }}" \
+          -var="cluster_name=${{ secrets.GCP_CLUSTER_NAME }}" \
+          -input=false -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         working-directory: ./terraform

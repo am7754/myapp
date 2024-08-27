@@ -3,6 +3,11 @@ variable "project_id" {
   type        = string
 }
 
+variable "google_credentials" {
+  description = "Google Cloud service account credentials in JSON format"
+  type        = string
+}
+
 variable "region" {
   description = "The region where resources will be created."
   type        = string
@@ -42,4 +47,8 @@ variable "docker_password" {
 variable "docker_email" {
   description = "Docker Hub email"
   type        = string
+}
+variable "gcp_credentials_base64" {
+  type        = string
+  description = "Base64-encoded Google Cloud credentials JSON"
 }
