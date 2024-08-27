@@ -10,7 +10,7 @@ service:
   port: 8080
 
 mysql:
-  image: mysql:8.0
+  host : 35.222.143.126
   username: user
   password: password
   database: mydb

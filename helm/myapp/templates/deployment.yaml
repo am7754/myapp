@@ -23,7 +23,7 @@ spec:
         - containerPort: 8080
         env:
         - name: MYSQL_HOST
-          value: "mysql"
+          value: "{{ .Values.env.MYSQL_HOST }}"
         - name: MYSQL_DATABASE
           value: "{{ .Values.mysql.database }}"
         - name: MYSQL_USER
