@@ -16,21 +16,6 @@ resource "google_container_cluster" "my-gke-cluster" {
   }
 }
 
-resource "google_artifact_registry_repository" "my_docker_repo_2" {
-  repository_id = var.repo_name
-  format        = "DOCKER"
-  location      = var.region
-  project       = var.project_id
-}
-
-provider "kubernetes" {
-  load_config_file       = "false"
-  host                   = google_container_cluster.my-gke-cluster.endpoint
-  client_certificate     = google_container_cluster.my-gke-cluster.master_auth.0.client_certificate
-  client_key             = google_container_cluster.my-gke-cluster.master_auth.0.client_key
-  cluster_ca_certificate = google_container_cluster.my-gke-cluster.master_auth.0.cluster_ca_certificate
-}
-
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   //name = "gke-my-gke-cluster-2-terraform-202408-cb68b8be-qmpn"
   cluster    = google_container_cluster.my-gke-cluster.name
@@ -42,13 +27,22 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     machine_type = var.node_machine_type
   }
 }
-resource "kubernetes_secret" "my-docker-secret" {
+resource "kubernetes_secret" "dockerhub_registry" {
   metadata {
-    name = "my-docker-secret"
+    name      = "dockerhub-secret"
+    namespace = "default" # Change if you are using a different namespace
   }
 
   data = {
-    ".dockerconfigjson" = var.docker_config_json
+    ".dockerconfigjson" = base64encode(jsonencode({
+      auths = {
+        "https://index.docker.io/v1/" = {
+          username = var.docker_username
+          password = var.docker_password
+          email    = var.docker_email
+        }
+      }
+    }))
   }
 
   type = "kubernetes.io/dockerconfigjson"
