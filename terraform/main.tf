@@ -37,7 +37,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 resource "kubernetes_secret" "my-docker-secret" {
   metadata {
     name      = "my-docker-secret"
-    namespace = "default"
   }
 
   data = {
