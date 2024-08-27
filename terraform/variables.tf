@@ -1,3 +1,7 @@
+variable "docker_config_json" {
+  type        = string
+  description = "Base64 encoded Docker config JSON"
+}
 variable "project_id" {
   description = "The ID of the GCP project."
   type        = string

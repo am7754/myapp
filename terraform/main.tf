@@ -1,6 +1,3 @@
-variable "docker_config_json" {
-  type = string
-}
 provider "google" {
   project = var.project_id
   region  = var.region
